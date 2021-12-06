@@ -71,9 +71,8 @@ npm run test
 
 ## API Documentation
 
-For API documentation we are using swagger by the integration between Joi and Hapi.js. The documentation itself can be seen in 
-You can access more detail documentation of the API on `/docs`, after the service is running.
-
+For the API documentation, we are using swagger with the integration of Joi and Hapi.js. 
+You can access more detailed documentation of the API on `/docs`, after the service is running.
 
 
 <!-- ROADMAP -->
