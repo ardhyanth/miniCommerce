@@ -8,7 +8,7 @@ const Schwifty = require('@hapipal/schwifty');
 const Pack = require('../package');
 const routes = require('./routes');
 const models = require('./models');
-const config = require('./config')
+const config = require('../config')
 
 const init = async () => {
     const server = Hapi.server({

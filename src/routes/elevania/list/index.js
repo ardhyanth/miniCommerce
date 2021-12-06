@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const fetch = require('node-fetch');
 const convert = require('xml-js');
-const config = require('../../../config');
+const config = require('../../../../config');
 
 module.exports = {
     method: 'GET',
