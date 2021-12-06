@@ -1,0 +1,42 @@
+{
+  "name": "minicommerce",
+  "version": "0.0.1",
+  "description": "This is mini e-commerce that using Elevania API under the hood",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc _mocha ./test --recursive",
+    "dev": "nodemon ./index.js"
+  },
+  "keywords": [
+    "hapi",
+    "commerce",
+    "simple"
+  ],
+  "author": "Rahmadani Ardhiyanto",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/hapi": "^20.2.1",
+    "@hapi/inert": "^6.0.4",
+    "@hapi/vision": "^6.1.0",
+    "@hapipal/schwifty": "^6.1.0",
+    "dotenv": "^10.0.0",
+    "hapi-pino": "^9.0.0",
+    "hapi-swagger": "^14.2.4",
+    "joi": "^17.5.0",
+    "knex": "^0.95.14",
+    "node-fetch": "^2.6.6",
+    "objection": "^3.0.0",
+    "pg": "^8.7.1",
+    "pino-pretty": "^7.2.0",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3",
+    "nodemon": "^2.0.15",
+    "nyc": "^15.1.0",
+    "proxyquire": "^2.1.3",
+    "sinon": "^12.0.1",
+    "sinon-chai": "^3.7.0"
+  }
+}
