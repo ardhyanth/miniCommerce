@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "This is mini e-commerce that using Elevania API under the hood",
   "main": "index.js",
+  "engines" : { "node" : ">=14" },
   "scripts": {
     "test": "nyc _mocha ./test --recursive",
     "dev": "nodemon ./index.js",

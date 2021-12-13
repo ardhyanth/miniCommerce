@@ -25,6 +25,14 @@
 
 This is  how you may setting up your project locally. To get a local copy up and running follow these simple example steps.
 
+### Requirements
+Here is the requirement to run this project, please install the right software properly.
+
+| Software      | Version |                            Note |
+|---------------|:-------:|--------------------------------:|
+| Node      |   >14   | needed for the newer ES version |
+| Postgresql      |   12    |                                 |
+
 ### Installation
 
 Below is how to installing and setting up the service. 
