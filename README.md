@@ -33,6 +33,8 @@ Here is the requirement to run this project, please install the right software p
 | Node      |   >14   | needed for the newer ES version |
 | Postgresql      |   12    |                                 |
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ### Installation
 
 Below is how to installing and setting up the service. 
@@ -53,8 +55,6 @@ Below is how to installing and setting up the service.
 5. For the DDL, you can see `DDL.sql` in project root. This is necessary to be executed due to the usage of trigger function that helps recalculating some field used in this project.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- USAGE EXAMPLES -->
 ## Usage
