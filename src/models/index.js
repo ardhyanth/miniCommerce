@@ -1,15 +1,22 @@
 const productModel = require('./product');
 const transactionAdjustmentModel = require('./transactionAdjustment');
 const orderModel = require('./order');
+const Pack = require('../../package.json').version;
 
-exports.plugin = {
-    async register(server, options) {
-        server.registerModel([
-            productModel,
-            transactionAdjustmentModel,
-            orderModel
-        ]);
-    },
-    version: require('../../package.json').version,
-    name: 'models'
+const models = [
+  productModel,
+  transactionAdjustmentModel,
+  orderModel,
+];
+
+const plugins = {
+  async register(server) {
+    models.forEach((model) => model.setLogger(server.logger));
+
+    server.registerModel(models);
+  },
+  version: Pack,
+  name: 'models',
 };
+
+module.exports = plugins;

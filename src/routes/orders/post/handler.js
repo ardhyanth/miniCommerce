@@ -1,22 +1,20 @@
 module.exports = async (request, h) => {
-    const { Order, Product } = request.server.models();
-    const { payload } = request;
+  const { Order, Product } = request.server.models();
+  const { payload } = request;
 
-    const product = await Product.query().where({ sku: payload.sku }).first();
-    if (!product) {
-        return {
-            status: 'canceled',
-            description: 'no product with specified SKU found'
-        };
-    }
+  const product = await Product.getBySku(payload.sku);
+  if (!product) {
+    return h.response({
+      status: 'canceled',
+      description: 'no product with specified SKU found',
+    });
+  }
 
-    const insertResult = await Order.query().insert({ ...payload, status: 'pending'});
+  const data = await Order.insertPendingOrder(payload, ['*']);
 
-    const data = await Order.query().where({ id: insertResult.id }).first();
-
-    return {
-        status: 'success',
-        description: 'data has been created successfully',
-        data
-    };
-}
+  return h.response({
+    status: 'success',
+    description: 'data has been created successfully',
+    data,
+  });
+};

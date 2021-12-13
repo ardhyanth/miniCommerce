@@ -1,23 +1,23 @@
 module.exports = async (request, h) => {
-    const { Order } = request.server.models();
-    const {
-        params: {
-            id
-        }
-    } = request;
+  const { Order } = request.server.models();
+  const {
+    params: {
+      id,
+    },
+  } = request;
 
-    const order = await Order.query().select().where('id', id).first();
+  const data = await Order.getById(id);
 
-    if (order) {
-        return {
-            status: 'success',
-            description: 'data has been retrieved successfully',
-            data: order
-        };
-    }
+  if (data) {
+    return h.response({
+      status: 'success',
+      description: 'data has been retrieved successfully',
+      data,
+    });
+  }
 
-    return {
-        status: 'failed',
-        description: 'no data found',
-    };
-}
+  return h.response({
+    status: 'failed',
+    description: 'no data found',
+  });
+};

@@ -1,7 +1,7 @@
 -- Create products table
 CREATE TABLE products (
   sku text PRIMARY KEY,
-  name text UNIQUE NOT NULL,
+  name text NOT NULL,
   price numeric NOT NULL,
   image text NOT NULL,
   stock numeric DEFAULT 0 NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE transaction_adjustments (
   id SERIAL PRIMARY KEY,
   sku text REFERENCES products (sku) ON DELETE cascade,
   qty numeric,
-  amount numeric DEFAULT 0 NOT NULL
+  amount numeric DEFAULT 0 NULL
 );
 
 -- Create orders table

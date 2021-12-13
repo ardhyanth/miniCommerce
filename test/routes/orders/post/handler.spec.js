@@ -1,52 +1,61 @@
 const { expect, use } = require('chai');
 const sinonChai = require('sinon-chai');
-const handler = require('../../../../src/routes/orders/post/handler');
 const sinon = require('sinon');
-const mockKnex = require('../../helper/mockKnex');
+const handler = require('../../../../src/routes/orders/post/handler');
 
 use(sinonChai);
 
 describe('post orders handler', () => {
-    let mockRequest;
+  let mockRequest;
+  let Order;
+  let Product;
+  let mockH;
 
-    beforeEach(async () => {
-        mockRequest = {
-            server: {
-                models: () => {
-                    return {
-                        Order: mockKnex,
-                        Product: mockKnex
-                    }
-                }
-            },
-            payload: {
-                sku: '123123',
-                qty: 1
-            }
-        };
-    });
+  beforeEach(async () => {
+    Order = {
+      insertPendingOrder: sinon.stub(),
+    };
+    Product = {
+      insertOne: sinon.stub(),
+      getBySku: sinon.stub(),
+    };
+    mockRequest = {
+      server: {
+        models: () => ({
+          Order,
+          Product,
+        }),
+      },
+      payload: {
+        sku: '123123',
+        qty: 1,
+      },
+    };
+    mockH = {
+      response: (data) => data,
+    };
+  });
 
-    it('should return failed if no product found', async () => {
-        mockKnex.first = sinon.stub().resolves(null);
-        const expectedResult = {
-            description: 'no product with specified SKU found',
-            status: 'canceled'
-        }
+  it('should return failed if no product found', async () => {
+    Product.getBySku.resolves(null);
+    const expectedResult = {
+      description: 'no product with specified SKU found',
+      status: 'canceled',
+    };
 
-        const res = await handler(mockRequest, {});
+    const res = await handler(mockRequest, mockH);
 
-        expect(res).to.deep.equal(expectedResult);
-    });
+    expect(res).to.deep.equal(expectedResult);
+  });
 
-    it('should call insert if product found', async () => {
-        mockKnex.first = sinon.stub().resolves({});
+  it('should call insert if product found', async () => {
+    Product.getBySku.resolves({ id: 1 });
 
-        await handler(mockRequest, {});
+    await handler(mockRequest, mockH);
 
-        expect(mockKnex.insert).to.be.calledWith({
-            sku: '123123',
-            qty: 1,
-            status: 'pending'
-        })
-    });
+    expect(Order.insertPendingOrder).to.be.calledWith({
+      sku: '123123',
+      qty: 1,
+    }, ['*']);
+  });
 });

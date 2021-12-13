@@ -1,17 +1,18 @@
 const productRoutes = require('./products');
 const transactionAdjustmentRoutes = require('./transactionAdjustments');
-const eleveniaRoutes = require('./elevania')
-const orderRoutes = require('./orders')
+const eleveniaRoutes = require('./elevania');
+const orderRoutes = require('./orders');
+const Pack = require('../../package.json').version;
 
 exports.plugin = {
-    async register(server, options) {
-        server.route([
-            ...productRoutes,
-            ...transactionAdjustmentRoutes,
-            ...eleveniaRoutes,
-            ...orderRoutes
-        ]);
-    },
-    version: require('../../package.json').version,
-    name: 'routes'
+  async register(server) {
+    server.route([
+      ...productRoutes,
+      ...transactionAdjustmentRoutes,
+      ...eleveniaRoutes,
+      ...orderRoutes,
+    ]);
+  },
+  version: Pack,
+  name: 'routes',
 };

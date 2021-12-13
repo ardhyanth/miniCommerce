@@ -14,7 +14,7 @@
   <h3 align="center">MiniCommerce</h3>
 
   <p align="center">
-    MiniCommerce is a node.js based web service that using elevenia API implementation under the hood
+    MiniCommerce is a node.js based web service that using Elevenia API implementation under the hood
     <br />
    
   </p>
@@ -80,7 +80,7 @@ You can access more detailed documentation of the API on `/docs`, after the serv
 
 - [x] Add Swagger
 - [x] Add core functionality
-- [x] Add endpoint proxy to elevenia
+- [x] Add endpoint proxy to Elevenia
 - [x] Add unit test
 - [ ] Restructure code hierarchy
 - [ ] add more unit test and complete coverate

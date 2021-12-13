@@ -5,9 +5,9 @@ const patchProduct = require('./patch');
 const postProduct = require('./post');
 
 module.exports = [
-    deleteProduct,
-    getProduct,
-    listProduct,
-    patchProduct,
-    postProduct
-]
+  deleteProduct,
+  getProduct,
+  listProduct,
+  patchProduct,
+  postProduct,
+];

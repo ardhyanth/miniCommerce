@@ -1,57 +1,58 @@
 const Joi = require('joi');
 
 module.exports = {
-    method: 'DELETE',
-    path: '/transaction-adjustments/{id}',
-    options: {
-        description: 'Delete a products',
-        notes: 'Need to provide product ID/SKU for the endpoint',
-        tags: ['api'],
-        validate: {
-            params: Joi.object({
-                id : Joi.string()
-                    .description('ID of transaction adjustment'),
-            })
-        },
+  method: 'DELETE',
+  path: '/transaction-adjustments/{id}',
+  options: {
+    description: 'Delete a transaction adjustment',
+    notes: 'Need to provide transaction adjustment ID for the endpoint',
+    tags: ['api'],
+    validate: {
+      params: Joi.object({
+        id: Joi.string()
+          .description('ID of transaction adjustment'),
+      }),
     },
-    handler: async (request, h) => {
-        const { TransactionAdjustment } = request.server.models();
-        const { logger } = request.server;
-        const {
-            params: {
-                id
-            }
-        } = request;
+  },
+  handler: async (request, h) => {
+    const { TransactionAdjustment } = request.server.models();
 
-        let data;
+    const { logger } = request.server;
+    const {
+      params: {
+        id,
+      },
+    } = request;
 
-        try {
-            // fetching target data to be represented in response
-            // if deleting process is success
-            data = await TransactionAdjustment.query().select().where('id', id).first();
+    let data;
 
-            if(!data) {
-                // return failed when no data is exist
-                return {
-                    status: 'failed',
-                    description: 'no data found'
-                }
-            }
+    try {
+      // fetching target data to be represented in response
+      // if deleting process is success
+      data = await TransactionAdjustment.getById(id);
 
-            await TransactionAdjustment.query().delete().where('id', id);
-        } catch (err) {
-            logger.error(err, 'something went wrong')
+      if (!data) {
+        // return failed when no data is exist
+        return h.response({
+          status: 'failed',
+          description: 'no data found',
+        });
+      }
 
-            return {
-                status: 'failed',
-                description: 'something went wrong'
-            }
-        }
+      await TransactionAdjustment.deleteById(id);
+    } catch (err) {
+      logger.error(err, 'something went wrong');
 
-        return {
-            status: 'success',
-            description: 'data has been deleted successfully',
-            data: data
-        };
+      return h.response({
+        status: 'failed',
+        description: 'something went wrong',
+      });
     }
+
+    return h.response({
+      status: 'success',
+      description: 'data has been deleted successfully',
+      data,
+    });
+  },
 };

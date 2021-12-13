@@ -5,9 +5,9 @@ const patchTransactionAdjustment = require('./patch');
 const postTransactionAdjustment = require('./post');
 
 module.exports = [
-    deleteTransactionAdjustment,
-    getTransactionAdjustment,
-    listTransactionAdjustment,
-    patchTransactionAdjustment,
-    postTransactionAdjustment
-]
+  deleteTransactionAdjustment,
+  getTransactionAdjustment,
+  listTransactionAdjustment,
+  patchTransactionAdjustment,
+  postTransactionAdjustment,
+];
